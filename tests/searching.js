@@ -12,12 +12,19 @@ vows.describe('searching').addBatch({                                           
           assert.equal(winner.name, 'statecharts and routes');
         }
       },
-    'containing the most keywords for the testing category': {         // Sub-Context
-      topic: "* test qunit css array delegate",                        // Topic
-        'should match color red and name testing': function (topic) {  // Vow
+    'containing the most keywords for the testing category': {
+      topic: "* test qunit css array delegate",
+        'should match color red and name testing': function (topic) {
           var winner = linelizer.searchExhaustivelyByKeywordCount(topic);
           assert.equal(winner.color, 'red');
           assert.equal(winner.name, 'testing');
+        }
+      },
+    'containing no keywords for any category': {
+      topic: "* my dog has fleas. mary has a little lamb.",
+        'should return null': function (topic) {
+          var winner = linelizer.searchExhaustivelyByKeywordCount(topic);
+          assert.equal(winner, null);
         }
       }
     }
