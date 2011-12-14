@@ -55,6 +55,10 @@ A single theme category can be targeted with:
 
 	node linelizer.js --input=CHANGELOG-SC.md --targets=red
 
+The search method can be a simple first-occurrence method, where the first theme category and the first matching keyword within that category is matched, or it can be exhaustive, where a count is made of all matching keywords within each category, before selecting the winning category. The search method can be set with:
+
+    node linelizer.js CHANGELOG-SC.md --targets=cyan --search=exhaustive
+
 Command Line Parameters
 -----------------------
 
