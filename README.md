@@ -33,26 +33,26 @@ Running
 
 linelizer may be run from the command line, with:
 
-node linelizer.js CHANGELOG.md (where CHANGELOG.md here is the filename of the itemized list text file).
+node linelizer.js CHANGELOG-SC.md (where CHANGELOG-SC.md here is the filename of the itemized list text file).
 
 This should print a color-coded version of the changelog to the console. Scroll back in your terminal window as needed.
 
 If you would like to search for one or more theme categories, you may run as:
 
-node linelizer.js CHANGELOG.md --targets=blue,red,cyan
+node linelizer.js CHANGELOG-SC.md --targets=blue,red,cyan
 
 or, with the filename also as a parameter, with:
 
-node linelizer.js --input=CHANGELOG.md --targets=blue,red,cyan
+node linelizer.js --input=CHANGELOG-SC.md --targets=blue,red,cyan
 
 A single theme category can be targeted with:
 
-node linelizer.js --input=CHANGELOG.md --targets=red
+node linelizer.js --input=CHANGELOG-SC.md --targets=red
 
 Command Line Parameters
 -----------------------
 
-input: input filename, e.g. --input=CHANGELOG.md
+input: input filename, e.g. --input=CHANGELOG-SC.md
 
 targets: search string, e.g. --targets=red,blue
 
