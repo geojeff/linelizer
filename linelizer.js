@@ -117,7 +117,7 @@ var colorize = function(lines) {
           winner = searchExhaustivelyByKeywordCount(line);
           break;
         default:
-          winner = searchByFirstOccurrence(line);
+          winner = searchExhaustivelyByKeywordCount(line);
           break;
       }
 
