@@ -25,13 +25,14 @@ You can leave blank lines, text-only labels, the markdown marker lines (e.g., '-
 You can make comments about your fixes with // style comments, e.g.:
 
 // Added simple numeric version label
+
 1.4
 CHANGELOG FOR 1.4
 
 Running
 -------
 
-linelizer may be run from the command line, with:
+**linelizer** may be run from the command line, with:
 
 node linelizer.js CHANGELOG-SC.md (where CHANGELOG-SC.md here is the filename of the itemized list text file).
 
@@ -63,7 +64,7 @@ Maurits Lamers (mauritslamers)
 
 Tests
 =====
-Tests are made in linelizer with the Vows testing framework. If you wish to install Vows for running tests, you may do so with:
+Tests are made in **linelizer** with the Vows testing framework. If you wish to install Vows for running tests, you may do so with:
 
 npm install vows
 
