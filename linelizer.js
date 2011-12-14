@@ -103,10 +103,17 @@ var colorize = function(lines) {
       var color = '',
           winningThemeCategory = null;
 
-      switch (searchMethod) {
+      switch (parameters.search) {
+        case 'first':
+        case 'FIRST':
+        case 'first-occurrence':
+        case 'first_occurrence':
+        case 'FIRST_OCCURRENCE':
         case FIRST_OCCURRENCE:
           winningThemeCategory = searchByFirstOccurrence(line);
           break;
+        case 'exhaustive':
+        case 'EXHAUSTIVE':
         case EXHAUSTIVE:
           winningThemeCategory = searchExhaustivelyByKeywordCount(line);
           break;
