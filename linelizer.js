@@ -41,19 +41,19 @@ var removeUnwantedLines = function(lines) {
 
 var searchByFirstOccurrence = function(line) {
   var words = line.split(' '),
-      winningThemeCategory = null,
+      winner = null,
       i = 0,
       j = 0,
       keyword = '';
 
-  while (i < words.length-1 && !winningThemeCategory) {
+  while (i < words.length-1 && !winner) {
     theme.categories.forEach(function(themeCategory) {
       j = 0;
-      while (j < themeCategory.keywords.length-1 && !winningThemeCategory) {
+      while (j < themeCategory.keywords.length-1 && !winner) {
         keyword = themeCategory.keywords[j];
         if (keyword === words[i] || line.indexOf(keyword) !== -1) {
           themeCategory.hitCount = 1;
-          winningThemeCategory = themeCategory;
+          winner = themeCategory;
         }
         j++;
       }
@@ -61,13 +61,13 @@ var searchByFirstOccurrence = function(line) {
     i++;
   }
 
-  return winningThemeCategory;
+  return winner;
 };
 
 var searchExhaustivelyByKeywordCount = function(line) {
   var words = line.split(' '),
       i = 0,
-      winningThemeCategory = null,
+      winner = null,
       maxHitCount = 0;
 
   // Zero out hitCounts for theme.categories.
@@ -89,18 +89,18 @@ var searchExhaustivelyByKeywordCount = function(line) {
   theme.categories.forEach(function(themeCategory) {
     if (themeCategory.hitCount > maxHitCount) {
       maxHitCount = themeCategory.hitCount;
-      winningThemeCategory = themeCategory;
+      winner = themeCategory;
     }
   });
 
-  return winningThemeCategory;
+  return winner;
 };
 
 var colorize = function(lines) {
   lines.forEach(function(originalLine) {
     var line = originalLine.toLowerCase();
     if (line.length > 0 && line[0] === '*' || line[0] === '-') {
-      var winningThemeCategory = null;
+      var winner = null; // winner === winning theme category.
 
       switch (parameters.search) {
         case 'first':
@@ -109,21 +109,23 @@ var colorize = function(lines) {
         case 'first_occurrence':
         case 'FIRST_OCCURRENCE':
         case FIRST_OCCURRENCE:
-          winningThemeCategory = searchByFirstOccurrence(line);
+          winner = searchByFirstOccurrence(line);
           break;
         case 'exhaustive':
         case 'EXHAUSTIVE':
         case EXHAUSTIVE:
-          winningThemeCategory = searchExhaustivelyByKeywordCount(line);
+          winner = searchExhaustivelyByKeywordCount(line);
           break;
         default:
-          winningThemeCategory = searchByFirstOccurrence(line);
+          winner = searchByFirstOccurrence(line);
           break;
       }
 
-      if (winningThemeCategory) {
-        if (!parameters.targets || (parameters.targets && parameters.targets.indexOf(winningThemeCategory.color) !== -1)) {
-          console.log(originalLine[winningThemeCategory.color]);
+      if (winner) {
+        if (!parameters.targets || (parameters.targets &&
+                                    (parameters.targets.indexOf(winner.color) !== -1 ||
+                                     parameters.targets.indexOf(winner.name) !== -1))) {
+          console.log(originalLine[winner.color]); // Equivalent to originalLine.blue; See colors framework.
         }
       } else if (!parameters.targets) { // Only let unmatched lines fall through if search is open.
         console.log(originalLine);
