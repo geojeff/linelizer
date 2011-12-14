@@ -55,6 +55,12 @@ A single theme category can be targeted with:
 
 	node linelizer.js --input=CHANGELOG-SC.md --targets=red
 
+where the target is given as the color name of the desired theme category. Or, targets can be specified as:
+
+    node linelizer.js --input=CHANGELOG-SC.md --targets='statecharts and routes, testing, docs'
+
+which would match theme categories on category name, not color. You can even mix and match, as long as the category names do not contain confusing use of the color names, which are from the node.js colors framework.
+
 The search method can be a simple first-occurrence method, where the first theme category and the first matching keyword within that category is matched, or it can be exhaustive, where a count is made of all matching keywords within each category, before selecting the winning category. The search method can be set with:
 
     node linelizer.js CHANGELOG-SC.md --targets=cyan --search=exhaustive
@@ -64,7 +70,7 @@ Command Line Parameters
 
 *input*: input filename, e.g. --input=CHANGELOG-SC.md
 
-*targets*: search string, e.g. --targets=red,blue
+*targets*: search string, e.g. --targets=red,blue, or --targets='statecharts and routes, testing'
 
 *search*: search method, e.g. --search=exhaustive
 
@@ -85,5 +91,4 @@ TODO Items
 ==========
 * Add a command line parameter for controlling sorting, which is not done presently.
 * Make the start-of-line markers, presently * and -, a configurable parameter.
-* Consider using theme category names instead of color names in search targets parameter.
 
