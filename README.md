@@ -60,7 +60,9 @@ targets: search string, e.g. --targets=red,blue
 
 Contributors
 ------------
+
 Jeff Pittman (geojeff)
+
 Maurits Lamers (mauritslamers)
 
 Tests
