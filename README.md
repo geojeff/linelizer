@@ -78,7 +78,6 @@ Tests are made in **linelizer** with the Vows testing framework. If you wish to 
 TODO Items
 ==========
 * Add a command line parameter for setting search method.
-* Add a command line option for reading the theme category data from a file. 
 * Add a command line parameter for controlling sorting, which may depend on the previous todo item.
 * Make the start-of-line markers, presently * and -, a configurable parameter.
 * Consider using theme category names instead of color names in search targets parameter.![]()
