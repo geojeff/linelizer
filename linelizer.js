@@ -98,10 +98,9 @@ var searchExhaustivelyByKeywordCount = function(line) {
 
 var colorize = function(lines) {
   lines.forEach(function(originalLine) {
-    line = originalLine.toLowerCase();
+    var line = originalLine.toLowerCase();
     if (line.length > 0 && line[0] === '*' || line[0] === '-') {
-      var color = '',
-          winningThemeCategory = null;
+      var winningThemeCategory = null;
 
       switch (parameters.search) {
         case 'first':
