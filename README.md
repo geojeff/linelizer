@@ -85,5 +85,5 @@ TODO Items
 ==========
 * Add a command line parameter for controlling sorting, which is not done presently.
 * Make the start-of-line markers, presently * and -, a configurable parameter.
-* Consider using theme category names instead of color names in search targets parameter.![]()
+* Consider using theme category names instead of color names in search targets parameter.
 
