@@ -3,8 +3,7 @@ var colors = require('colors');
 var theme = require('./theme');
 
 var FIRST_OCCURRENCE = 0, // Sensitive to theme category order, and within those, keyword order.
-    EXHAUSTIVE = 1,
-    searchMethod = EXHAUSTIVE;
+    EXHAUSTIVE = 1;
 
 var fixNewlines = function(lines) {
   var previousLine = '',
@@ -122,14 +121,13 @@ var colorize = function(lines) {
       }
 
       if (winner) {
-        if (!parameters.targets || (parameters.targets &&
-                                     parameters.targets.indexOf(winner.name) !== -1)) {
+        if (!parameters.targets || (parameters.targets && parameters.targets.indexOf(winner.name) !== -1)) {
           console.log(originalLine[winner.color]); // Equivalent to originalLine.blue; See colors framework.
         }
       } else if (!parameters.targets) { // Only let unmatched lines fall through if search is open.
         console.log(originalLine);
       }
-    } else {  // These should only be version label lines, so write out as markdown titles.
+    } else {  // These should only be version label lines, e.g., 1.5.3. Write out as markdown titles.
       console.log('');
       console.log(originalLine);
       console.log(new Array(originalLine.length+1).join('-'));
