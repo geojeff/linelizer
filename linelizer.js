@@ -65,30 +65,20 @@ var searchByFirstOccurrence = function(line) {
 
 var searchExhaustivelyByKeywordCount = function(line) {
   var words = line.split(' '),
-      i = 0,
-      winner = null,
-      maxHitCount = 0;
+      winner = null;
+      maxHitCount = 0,
+      hitCount = 0;
 
-  // Zero out hitCounts for theme.categories.
-  theme.categories.forEach(function(themeCategory) {
-    themeCategory.hitCount = 0;
-  });
-
-  while (i < words.length-1) {
-    theme.categories.forEach(function(themeCategory) {
-      themeCategory.keywords.forEach(function(keyword) {
-        if (keyword === words[i] || line.indexOf(keyword) !== -1) {
-          themeCategory.hitCount += 1;
-        }
+  theme.categories.forEach(function(themeCategory) {    // For all categories...
+    hitCount = 0;
+    themeCategory.keywords.forEach(function(keyword) {  // For all keywords in category...
+      words.forEach(function(word) {                    // How many times is the keyword found?
+        if (keyword === word) hitCount += 1;
       });
     });
-    i++;
-  }
-
-  theme.categories.forEach(function(themeCategory) {
-    if (themeCategory.hitCount > maxHitCount) {
-      maxHitCount = themeCategory.hitCount;
+    if (hitCount > maxHitCount) {
       winner = themeCategory;
+      maxHitCount = hitCount;
     }
   });
 
