@@ -27,6 +27,7 @@ You can make comments about your fixes with // style comments, e.g.:
 // Added simple numeric version label
 
 1.4
+
 CHANGELOG FOR 1.4
 
 Running
