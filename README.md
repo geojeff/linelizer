@@ -8,7 +8,7 @@ Description
 
 Preparing Input File
 --------------------
-Generally, markdown format is assumed.
+Generally, markdown format is assumed. CHANGELOG-SC.md is an example input file from SproutCore.
 
 If the input file is a changelog for a software project, go through the version headings and make sure each one is a simple numeric label. For example, change:
 
@@ -27,6 +27,10 @@ You can make comments about your fixes with // style comments, e.g.:
 	// Added simple numeric version label
 	1.4
 	CHANGELOG FOR 1.4
+
+Preparing Theme File
+--------------------
+The theme.js file contains an example for SproutCore, which goes along with the example CHANGELOG-SC.md file. For your project, set the order of the categories, and the order of keywords within each category, which matters for first occurrence searching. The input file is changed to lower case for searching, so use lowercase keywords in theme.js.
 
 Running
 -------

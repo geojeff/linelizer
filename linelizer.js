@@ -1,37 +1,6 @@
 var fs = require('fs');
 var colors = require('colors');
-
-// Authors: Jeff Pittman (geojeff)
-//          Maurits Lamers (mauritslamers)
-
-var themeCategories = [
-  { theme: 'statecharts and routes',
-    color: 'blue',
-    keywords: ['statechart', 'state chart', 'state', 'substate', 'route'], hitCount: 0 },
-  { theme: 'testing',
-    color: 'red',
-    keywords: ['test', 'qunit' ], hitCount: 0 },
-  { theme: 'browsers and html',
-    color: 'yellow',
-    keywords: ['safari', 'ie', 'internet explorer', 'chrome', 'ff', 'firefox', 'opera', 'iphone', 'ipad', 'desktop', 'mobile', 'browser', 'xhtml', 'html', 'html5', 'xss'], hitCount: 0 },
-  { theme: 'runtime and such',
-    color: 'grey',
-    keywords: ['observable', 'observer', 'responder', 'bind', 'enumerable', 'runtime', 'foundation', 'array', 'manyarray', 'childarray', 'prototype', 'controller', 'runloop', 'run loop', 'property'], hitCount: 0 },
-  { theme: 'css and themes',
-    color: 'green',
-    keywords: ['font', 'css', 'zindex', 'ace', 'sass'], hitCount: 0 },
-  { theme: 'views and events',
-    color: 'cyan',
-    keywords: ['view', 'button', 'label', 'checkbox', 'pane', 'menu', 'list', 'row', 'column', 'item', 'listitem', 'disclosure', 'layout', 'width', 'height', 'top', 'bottom', 'left', 'right', 'centerx', 'centery', 'border', 'layer', 'frame', 'scroll', 'picker', 'container', 'theme', 'icon', 'toggle', 'touch', 'click', 'drag', 'drop', 'mousewheel', 'event', 'mouse', 'render', 'aria', 'chance' ], hitCount: 0 },
-  { theme: 'models, store, and datasource',
-    color: 'magenta',
-    keywords: ['model', 'recordattribute', 'record', 'attribute', 'datastore', 'store', 'datasource', 'quer', 'xhr', 'request', 'response', 'ajax'], hitCount: 0 },
-  { theme: 'docs',
-    color: 'rainbow',
-    keywords: ['doc', 'typo'], hitCount: 0 },
-  { theme: 'handlebars and render delegates',
-    color: 'inverse',
-    keywords: ['handlebar', 'mustache', 'template', '{{', '}}', '#collection', 'render delegate', 'delegate'], hitCount: 0 }];
+var theme = require('./theme');
 
 var FIRST_OCCURRENCE = 0, // Sensitive to theme category order, and within those, keyword order.
     EXHAUSTIVE = 1,
@@ -78,7 +47,7 @@ var searchByFirstOccurrence = function(line) {
       keyword = '';
 
   while (i < words.length-1 && !winningThemeCategory) {
-    themeCategories.forEach(function(themeCategory) {
+    theme.categories.forEach(function(themeCategory) {
       j = 0;
       while (j < themeCategory.keywords.length-1 && !winningThemeCategory) {
         keyword = themeCategory.keywords[j];
@@ -101,13 +70,13 @@ var searchExhaustivelyByKeywordCount = function(line) {
       winningThemeCategory = null,
       maxHitCount = 0;
 
-  // Zero out hitCounts for themeCategories.
-  themeCategories.forEach(function(themeCategory) {
+  // Zero out hitCounts for theme.categories.
+  theme.categories.forEach(function(themeCategory) {
     themeCategory.hitCount = 0;
   });
 
   while (i < words.length-1) {
-    themeCategories.forEach(function(themeCategory) {
+    theme.categories.forEach(function(themeCategory) {
       themeCategory.keywords.forEach(function(keyword) {
         if (keyword === words[i] || line.indexOf(keyword) !== -1) {
           themeCategory.hitCount += 1;
@@ -117,7 +86,7 @@ var searchExhaustivelyByKeywordCount = function(line) {
     i++;
   }
 
-  themeCategories.forEach(function(themeCategory) {
+  theme.categories.forEach(function(themeCategory) {
     if (themeCategory.hitCount > maxHitCount) {
       maxHitCount = themeCategory.hitCount;
       winningThemeCategory = themeCategory;
