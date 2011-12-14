@@ -5,15 +5,15 @@ var vows = require('vows'),
 vows.describe('command line arguments').addBatch({                    // Batch
   'A linelizer call': {                                               // Context
     'containing only the simple input filename': {                    // Sub-Context
-      topic: ['node', 'linelizer.js', 'CHANGELOG-SC.md'],                        // Topic
+      topic: ['node', 'linelizer.js', 'CHANGELOG-SC.md'],             // Topic
         'should return the input parameter': function (topic) {       // Vow
           var result = linelizer.gatherCommandLineParameters(topic);
           assert.equal(result.input, 'CHANGELOG-SC.md');
         }
       },
-    'containing the input filename and the targets parameter': {         // Sub-Context
+    'containing the input filename and the targets parameter': {            // Sub-Context
       topic: ['node', 'linelizer.js', 'CHANGELOG-SC.md', '--targets=blue'], // Topic
-        'should return two parameters': function (topic) {               // Vow
+        'should return two parameters': function (topic) {                  // Vow
           var result = linelizer.gatherCommandLineParameters(topic);
           assert.equal(result.input, 'CHANGELOG-SC.md');
           assert.equal(result.targets, 'blue');
