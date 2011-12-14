@@ -123,8 +123,7 @@ var colorize = function(lines) {
 
       if (winner) {
         if (!parameters.targets || (parameters.targets &&
-                                    (parameters.targets.indexOf(winner.color) !== -1 ||
-                                     parameters.targets.indexOf(winner.name) !== -1))) {
+                                     parameters.targets.indexOf(winner.name) !== -1)) {
           console.log(originalLine[winner.color]); // Equivalent to originalLine.blue; See colors framework.
         }
       } else if (!parameters.targets) { // Only let unmatched lines fall through if search is open.
