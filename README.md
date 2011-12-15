@@ -92,7 +92,7 @@ The default theme.js file is for use with the SproutCore changelog. If you are c
 
     node linelizer.js --input=CHANGELOG-SC.md --colors=yes --theme=custom_theme.js
 
-You may provide the full path, as with --theme=/my/full/path/custom_theme.js. Note: provided as --theme=custom_theme.js, the custom_theme.js file must be in the root linelizer directory; './' will be prepended if not provided explitly with --theme=./custom_theme.js.
+You may provide the full path, as with --theme=/my/full/path/custom_theme.js. Note: provided as --theme=custom_theme.js, the custom_theme.js file must be in the root linelizer directory; './' will be prepended if not provided explicitly with --theme=./custom_theme.js.
 
 Using a Keywords List
 ---------------------
@@ -106,7 +106,7 @@ Command Line Parameters
 
 *input*: input filename, e.g. --input=CHANGELOG-SC.md
 
-*targets*: search string, e.g. --targets='statecharts and routes, testing'
+*targets*: search categories, e.g. --targets='statecharts and routes, testing'
 
 *colors*: print colored lines to console, or not, e.g. --colors=yes
 
