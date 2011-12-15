@@ -30,7 +30,7 @@ You can make comments about your fixes with // style comments, e.g.:
 
 Preparing Theme File
 --------------------
-The theme.js file contains an example for SproutCore, which goes along with the example CHANGELOG-SC.md file. For your project, set the order of the categories, and the order of keywords within each category, which matters for first occurrence searching. The input file is changed to lower case for searching, so use lowercase keywords in theme.js.
+The theme.js file contains an example for SproutCore, which goes along with the example CHANGELOG-SC.md file. For your project, set the order of the categories, and the order of keywords within each category, which matters for first occurrence searching. The input file is changed to lower case for searching, so use lowercase keywords in theme.js. An exact match will be made for each keyword against separate words on a line, and there will also be a simple search for the keyword within the line. This means that the keyword test will match test, tests, testing, etc., so emphasize short unique keywords.
 
 Use color names allowed by the node.js colors framework.
 
@@ -49,7 +49,7 @@ Search targets can be specified as:
 
     node linelizer.js --input=CHANGELOG-SC.md --targets='statecharts and routes, testing, docs'
 
-which would match lines fitting at least partially these theme categories (three of them: statecharts and routes, testing, and docs), and would color-code them according to which category has the most keywords per line, using the colors set per theme category in the themes.js file.
+which would match lines fitting at least partially these theme categories (three of them: statecharts and routes, testing, and docs), and would color-code them according to which category has the most keywords per line, using the colors set per theme category in the theme.js file.
 
 Command Line Parameters
 -----------------------
