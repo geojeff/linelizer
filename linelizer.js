@@ -89,7 +89,7 @@ var emitLines = function(lines, theme_file) {
 
       if (winner) {
         if (!parameters.targets || (parameters.targets && parameters.targets.indexOf(winner.name) !== -1)) {
-          if (parameters.colors && parameters.colors.toLowerCase() !== 'no') {
+          if (colors && parameters.colors && parameters.colors.toLowerCase() !== 'no') {
             console.log(originalLine[winner.color]); // Equivalent to originalLine.blue; See colors framework.
           } else {
             console.log(originalLine);
