@@ -75,9 +75,9 @@ Then, you should be able to run all tests with:
 
     vows tests/*
 
-and individual tests with:
+and individual tests, for example, with:
 
-    node tests/searching.js, for example
+    node tests/searching.js
 
 TODO Items
 ==========
