@@ -18,6 +18,15 @@ vows.describe('command line arguments').addBatch({                    // Batch
           assert.equal(result.input, 'CHANGELOG-SC.md');
         }
       },
+    'containing parameters as --input=CHANGELOG-SC.md --colorize=no --targets=testing': {
+      topic: ['node', 'linelizer.js', '--input=CHANGELOG-SC.md', '--colorize=no', '--targets=testing'], // Odd quoting needed.
+        'should return three parameters': function (topic) {
+          var result = linelizer.gatherCommandLineParameters(topic);
+          assert.equal(result.input, 'CHANGELOG-SC.md');
+          assert.equal(result.colorize, 'no');
+          assert.equal(result.targets, 'testing');
+        }
+      },
     'containing the input parameter and the targets parameter as "statecharts and routes, testing"': {
       topic: ['node', 'linelizer.js', '--input=CHANGELOG-SC.md', '--targets=statecharts and routes, testing'], // Odd quoting needed.
         'should return two parameters': function (topic) {

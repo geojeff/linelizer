@@ -2,7 +2,10 @@ Description
 ===============
 **linelizer**, a node.js program, was written as a changelog analyzer for SproutCore, but it is generally useful for any text file with an itemized list. Out-of-the-box, the program pays attention to lines that begin with a number, for release version label lines, or with an asterisk (*) or a dash (-), for item lines. These do not have to be at the very beginning of the line. Item lines are searched for keywords and highlighted according to the color that has been set for theme categories of keywords. Lines which do not begin with either * or - are not processed, and are simply printed to the console unchanged. Release version lines, for example 1.5.3, are printed to the console followed by a line of dashes to produce a markdown style heading.
 
-**linelizer** uses the node.js colors module, which you may install with:
+Installation
+------------
+
+**linelizer** uses the node.js colors module, which you may optionally install with:
 
 	npm install colors
 
@@ -41,15 +44,51 @@ Running
 
 	node linelizer.js CHANGELOG-SC.md 
 
-(where CHANGELOG-SC.md here is the filename of the itemized list text file).
+(where CHANGELOG-SC.md is the filename of the itemized list text file). This should print to the console all lines of the form '* some text', '- some text', and '1.5.3' -- all other lines will be ignored and will not be printed. The numberic version labels, e.g., 1.5.3 will be printed in markdown style, with a line of dashes following the version line. Here is a segment of expected output:
 
-This should print a color-coded version of the changelog to the console. Scroll back in your terminal window as needed.
+    1.5.0.pre.5
+    -----------
+
+    * Support for high resolution screens.
+    * Support for IE7 base64 images using MHTML
+    * Initial support for accessibility (WAI-ARIA)
+    * Improved SC.Logger, allows log recording and different reporting levels
+    * Modular loading and whitelisting.
+    * Improvements and bug fixes in SC.TemplateView and Handlebars helpers
+    * Added {{bindAttr}}, {{boundIf}}, and {{collection}} helpers
+    * Fixes to Ace CSS
+    * IE7 compatibility fixes
+    * Numerous bug fixes and minor improvements
+
+    1.5.0.pre.4
+    -----------
+
+    * We are beginning to move API that we don't believe will be ready before 1.5
+    * Support for extending classes after they've been created with the
 
 Search targets can be specified as:
 
     node linelizer.js --input=CHANGELOG-SC.md --targets='statecharts and routes, testing, docs'
 
-which would match lines fitting at least partially these theme categories (three of them: statecharts and routes, testing, and docs), and would color-code them according to which category has the most keywords per line, using the colors set per theme category in the theme.js file.
+which would match lines fitting at least partially these theme categories (three of them: statecharts and routes, testing, and docs).
+
+Running with Colors
+-------------------
+
+If you have installed the node.js colors module (npm install colors), then you may turn console log line coloring on with:
+
+    node linelizer.js --input=CHANGELOG-SC.md --colors=yes
+
+This would give the same results as before, but would now color-code them, using the colors set per theme category in the theme.js file.
+
+Using a Custom Theme
+--------------------
+
+The default theme.js file is for use with the SproutCore changelog. If you are customizing for another project, make your own theme file as the custom_theme.js file shows. Then, set the theme parameter to use:
+
+    node linelizer.js --input=CHANGELOG-SC.md --colors=yes --theme=custom_theme.js
+
+You may provide the full path, as with --theme=/my/full/path/custom_theme.js. Note: provided as --theme=custom_theme.js, the custom_theme.js file must be in the root linelizer directory; './' will be prepended if not provided explitly with --theme=./custom_theme.js.
 
 Command Line Parameters
 -----------------------
@@ -57,6 +96,10 @@ Command Line Parameters
 *input*: input filename, e.g. --input=CHANGELOG-SC.md
 
 *targets*: search string, e.g. --targets='statecharts and routes, testing'
+
+*colors*: print colored lines to console, or not, e.g. --colors=yes
+
+*theme*: custom theme file, e.g. --theme=custom_theme.js
 
 Contributors
 ------------

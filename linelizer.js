@@ -1,5 +1,9 @@
 var fs = require('fs');
-var colors = require('colors');
+try {
+  var colors = require('colors');
+} catch (err) {
+  console.log('Running without colors module...');
+}
 var theme = require('./theme');
 
 var FIRST_OCCURRENCE = 0, // Sensitive to theme category order, and within those, keyword order.
@@ -38,38 +42,28 @@ var removeUnwantedLines = function(lines) {
   return keptLines;
 };
 
-var searchByFirstOccurrence = function(line) {
-  var words = line.split(' '),
-      winner = null,
-      i = 0,
-      j = 0,
-      keyword = '';
-
-  while (i < words.length-1 && !winner) {
-    theme.categories.forEach(function(themeCategory) {
-      j = 0;
-      while (j < themeCategory.keywords.length-1 && !winner) {
-        keyword = themeCategory.keywords[j];
-        if (keyword === words[i] || line.indexOf(keyword) !== -1) {
-          themeCategory.hitCount = 1;
-          winner = themeCategory;
-        }
-        j++;
-      }
-    });
-    i++;
-  }
-
-  return winner;
-};
-
-var searchExhaustivelyByKeywordCount = function(line) {
+var searchExhaustivelyByKeywordCount = function(line, theme_file) {
   var words = line.split(' '),
       winner = null;
       maxHitCount = 0,
-      hitCount = 0;
+      hitCount = 0,
+      active_theme = {};
 
-  theme.categories.forEach(function(themeCategory) {    // For all categories...
+  if (theme_file) {
+    var theme_with_path = ''; // For require to work, if needed, the custom theme path must be as './custom_theme.js'.
+
+    if (parameters.theme[0] === '/' || parameters.theme[0] === '.') {
+      theme_with_path = parameters.theme;
+    } else {
+      theme_with_path = './' + parameters.theme;
+    }
+
+    active_theme = require(theme_with_path);
+  } else {
+    active_theme = theme;
+  }
+
+  active_theme.categories.forEach(function(themeCategory) {  // For all categories...
     hitCount = 0;
     themeCategory.keywords.forEach(function(keyword) {  // For all keywords in category...
       words.forEach(function(word) {                    // How many times is the keyword found?
@@ -85,36 +79,23 @@ var searchExhaustivelyByKeywordCount = function(line) {
   return winner;
 };
 
-var colorize = function(lines) {
+var emitLines = function(lines, theme_file) {
   lines.forEach(function(originalLine) {
     var line = originalLine.toLowerCase();
     if (line.length > 0 && line[0] === '*' || line[0] === '-') {
       var winner = null; // winner === winning theme category.
 
-      switch (parameters.search) {
-        case 'first':
-        case 'FIRST':
-        case 'first-occurrence':
-        case 'first_occurrence':
-        case 'FIRST_OCCURRENCE':
-        case FIRST_OCCURRENCE:
-          winner = searchByFirstOccurrence(line);
-          break;
-        case 'exhaustive':
-        case 'EXHAUSTIVE':
-        case EXHAUSTIVE:
-          winner = searchExhaustivelyByKeywordCount(line);
-          break;
-        default:
-          winner = searchExhaustivelyByKeywordCount(line);
-          break;
-      }
+      winner = searchExhaustivelyByKeywordCount(line, theme_file);
 
       if (winner) {
         if (!parameters.targets || (parameters.targets && parameters.targets.indexOf(winner.name) !== -1)) {
-          console.log(originalLine[winner.color]); // Equivalent to originalLine.blue; See colors framework.
+          if (parameters.colors && parameters.colors.toLowerCase() !== 'no') {
+            console.log(originalLine[winner.color]); // Equivalent to originalLine.blue; See colors framework.
+          } else {
+            console.log(originalLine);
+          }
         }
-      } else if (!parameters.targets) { // Only let unmatched lines fall through if search is open.
+      } else if (!parameters.targets) { // Only let unmatched lines fall through if search is open. And never colors.
         console.log(originalLine);
       }
     } else {  // These should only be version label lines, e.g., 1.5.3. Write out as markdown titles.
@@ -182,17 +163,25 @@ if (process.argv.length === 2) {
   parameters = gatherCommandLineParameters(process.argv);
 }
 
+var theme_file = null;
+
 if (parameters) {
+  if (parameters.theme) {
+    try {
+      theme_file = fs.readFileSync(parameters.theme, 'utf-8');
+    } catch (err) {
+      console.log('Problem reading custom theme file');
+    }
+  }
   var lines = fs.readFileSync(parameters.input, 'utf-8').split('\n');
   lines = fixNewlines(lines);
   lines = removeUnwantedLines(lines);
-  colorize(lines);
+  emitLines(lines, theme_file);
 }
 
 exports.fixNewlines = fixNewlines;
 exports.removeUnwantedLines = removeUnwantedLines;
 exports.gatherCommandLineParameters = gatherCommandLineParameters;
-exports.searchByFirstOccurrence = searchByFirstOccurrence;
 exports.searchExhaustivelyByKeywordCount = searchExhaustivelyByKeywordCount;
-exports.colorize = colorize;
+exports.emitLines = emitLines;
 

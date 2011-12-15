@@ -1,0 +1,31 @@
+var categories = [
+  { name: 'rocks',
+    color: 'blue',
+    keywords: ['gneiss', 'sandstone', 'slate', 'granite', 'schist'] },
+  { name: 'minerals',
+    color: 'red',
+    keywords: ['garnet', 'quartz' ] },
+  { name: 'elements',
+    color: 'yellow',
+    keywords: ['nitrogen', 'oxygen', 'potassium', 'mercury', 'calcium'] },
+  { name: 'actors',
+    color: 'grey',
+    keywords: ['brad pitt', 'will arnett', 'clint eastwood', 'peewee herman'] },
+  { name: 'actresses',
+    color: 'green',
+    keywords: ['demi moore', 'charlize theron', 'cissie spacek', 'parker posey', 'laura dern'] },
+  { name: 'dog breeds',
+    color: 'cyan',
+    keywords: ['golden retriever', 'cocker spaniel', 'poodle', 'pomeranian', 'bulldog' ] },
+  { name: 'cat breeds',
+    color: 'magenta',
+    keywords: ['burmese', 'siamese', 'manx', 'persian'] },
+  { name: 'auto makers',
+    color: 'rainbow',
+    keywords: ['ford', 'toyota', 'honda'] },
+  { name: 'computer makers',
+    color: 'inverse',
+    keywords: ['apple', 'gateway', 'dell'] }
+];
+
+exports.categories = categories;
