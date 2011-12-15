@@ -71,6 +71,14 @@ Tests are made in **linelizer** with the Vows testing framework. If you wish to 
 
 	npm install vows
 
+Then, you should be able to run all tests with:
+
+    vows tests/*
+
+and individual tests with:
+
+    node tests/searching.js, for example
+
 TODO Items
 ==========
 * Add a command line parameter for controlling sorting, which is not done presently.
