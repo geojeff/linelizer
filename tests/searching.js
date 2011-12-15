@@ -26,6 +26,13 @@ vows.describe('searching').addBatch({                                           
           var winner = linelizer.searchExhaustivelyByKeywordCount(topic);
           assert.equal(winner, null);
         }
+      },
+    'containing two keywords each for testing and docs categories': {
+      topic: "* test qunit doc typo",
+        'should return testing, because it has lower array index': function (topic) {
+          var winner = linelizer.searchExhaustivelyByKeywordCount(topic);
+          assert.equal(winner.name, 'testing');
+        }
       }
     }
 }).export(module);

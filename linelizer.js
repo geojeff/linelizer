@@ -158,7 +158,6 @@ var gatherCommandLineParameters = function(args) {
 
         if (parameter && value) {
           parameters[parameter] =  value;
-          console.log('parameters', parameters);
         }
       }
     }
