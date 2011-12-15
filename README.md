@@ -90,6 +90,13 @@ The default theme.js file is for use with the SproutCore changelog. If you are c
 
 You may provide the full path, as with --theme=/my/full/path/custom_theme.js. Note: provided as --theme=custom_theme.js, the custom_theme.js file must be in the root linelizer directory; './' will be prepended if not provided explitly with --theme=./custom_theme.js.
 
+Using a Keywords List
+---------------------
+
+If you want to override use of a theme altogether, you may provide keywords on the command line, with:
+
+    node linelizer.js --input=CHANGELOG-SC.md --colors=yes --keywords=bug,fix,oops
+
 Command Line Parameters
 -----------------------
 
@@ -100,6 +107,8 @@ Command Line Parameters
 *colors*: print colored lines to console, or not, e.g. --colors=yes
 
 *theme*: custom theme file, e.g. --theme=custom_theme.js
+
+*keywords*: custom keywords, e.g. --keywords="handlebars,templates" (comma-delimited)
 
 Contributors
 ------------

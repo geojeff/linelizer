@@ -85,18 +85,27 @@ var emitLines = function(lines, theme_file) {
     if (line.length > 0 && line[0] === '*' || line[0] === '-') {
       var winner = null; // winner === winning theme category.
 
-      winner = searchExhaustivelyByKeywordCount(line, theme_file);
+      if (parameters.keywords) {
+        parameters.keywords.toLowerCase().split(',').forEach(function(keyword) {  // For all keywords provided...
+          line.split(' ').forEach(function(word) {                                // Is keyword in line?
+            if (keyword === word || line.indexOf(keyword) != -1) winner = true;
+          }); // [TODO] This forEach unnecessarily goes through all words.
+        });
+        if (winner) console.log(originalLine);
+      } else {
+        winner = searchExhaustivelyByKeywordCount(line, theme_file);
 
-      if (winner) {
-        if (!parameters.targets || (parameters.targets && parameters.targets.indexOf(winner.name) !== -1)) {
-          if (colors && parameters.colors && parameters.colors.toLowerCase() !== 'no') {
-            console.log(originalLine[winner.color]); // Equivalent to originalLine.blue; See colors framework.
-          } else {
-            console.log(originalLine);
+        if (winner) {
+          if (!parameters.targets || (parameters.targets && parameters.targets.indexOf(winner.name) !== -1)) {
+            if (colors && parameters.colors && parameters.colors.toLowerCase() !== 'no') {
+              console.log(originalLine[color]); // Equivalent to originalLine.blue; See colors framework.
+            } else {
+              console.log(originalLine);
+            }
           }
+        } else if (!parameters.targets) { // Only let unmatched lines fall through if search is open. And never colors.
+          console.log(originalLine);
         }
-      } else if (!parameters.targets) { // Only let unmatched lines fall through if search is open. And never colors.
-        console.log(originalLine);
       }
     } else {  // These should only be version label lines, e.g., 1.5.3. Write out as markdown titles.
       console.log('');
