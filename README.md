@@ -30,7 +30,7 @@ You can make comments about your fixes with // style comments, e.g.:
 
 Preparing Theme File
 --------------------
-The theme.js file contains an example for SproutCore, which goes along with the example CHANGELOG-SC.md file. For your project, set the order of the categories, and the order of keywords within each category, which matters for first occurrence searching. The input file is changed to lower case for searching, so use lowercase keywords in theme.js. An exact match will be made for each keyword against separate words on a line, and there will also be a simple search for the keyword within the line. This means that the keyword test will match test, tests, testing, etc., so emphasize short unique keywords.
+The theme.js file contains an example for SproutCore, which goes along with the example CHANGELOG-SC.md file. For your project, set the order of the categories, and the order of keywords within each category, which matters for first occurrence searching. The input file is changed to lower case for searching, so use lowercase keywords in theme.js. An exact match will be made for each keyword against separate words on a line, and there will also be a simple search for the keyword within the line. This means that the keyword test will match test, tests, testing, etc., so emphasize short unique keywords. You may also wish to erect a system of functions that process and parse words from API docs, etc.
 
 Use color names allowed by the node.js colors framework.
 
@@ -75,4 +75,5 @@ TODO Items
 ==========
 * Add a command line parameter for controlling sorting, which is not done presently.
 * Make the start-of-line markers, presently * and -, a configurable parameter.
+* Review the keywords and search system.
 
