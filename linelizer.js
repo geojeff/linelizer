@@ -73,7 +73,7 @@ var searchExhaustivelyByKeywordCount = function(line) {
     hitCount = 0;
     themeCategory.keywords.forEach(function(keyword) {  // For all keywords in category...
       words.forEach(function(word) {                    // How many times is the keyword found?
-        if (keyword === word) hitCount += 1;
+        if (keyword === word || line.indexOf(keyword) != -1) hitCount += 1;
       });
     });
     if (hitCount > maxHitCount) {
