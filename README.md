@@ -129,11 +129,15 @@ Tests are made in **linelizer** with the Vows testing framework. If you wish to 
 
 Then, you should be able to run all tests with:
 
-    vows tests/*
+    vows test/*
+
+or, to see a more complete report, run:
+
+    vows test/* --spec
 
 and individual tests, for example, with:
 
-    node tests/searching.js
+    node test/searching.js
 
 TODO Items
 ==========
