@@ -7,16 +7,16 @@ try {
 var theme = require('./theme');
 
 var fixNewlines = function(lines) {
-  var previousLine = '',
+  var previousLineMarker = '',
   fixedLines = [];
 
   lines.forEach(function(line) {
     line = line.trim();
-    if (line.length > 0 && line[0] !== '*' && line[0] !== '-' && previousLine !== '') {
+    if (line.length > 0 && line[0] !== '*' && line[0] !== '-' && previousLineMarker !== '') {
       fixedLines[-1] += line;
     } else {
       fixedLines.push(line);
-      previousLine = line;
+      previousLineMarker = line.slice(0, 2);
     }
   });
 
