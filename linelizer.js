@@ -6,9 +6,6 @@ try {
 }
 var theme = require('./theme');
 
-var FIRST_OCCURRENCE = 0, // Sensitive to theme category order, and within those, keyword order.
-    EXHAUSTIVE = 1;
-
 var fixNewlines = function(lines) {
   var previousLine = '',
   fixedLines = [];
