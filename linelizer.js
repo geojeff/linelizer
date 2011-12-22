@@ -156,7 +156,7 @@ var gatherCommandLineParameters = function(args) {
 var parameters = null;
 
 if (process.argv.length === 2) {
-  if (process.argv[1] === 'linearizer.js') {
+  if (process.argv[1] === 'linelizerjs') {
     console.log('See the README.md file at http://github.com/geojeff/linelizer');
   } else {
     console.log('linelizer Testing...');
