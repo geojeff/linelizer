@@ -41,7 +41,7 @@ var removeUnwantedLines = function(lines) {
 
 var searchExhaustivelyByKeywordCount = function(line, theme_file) {
   var words = line.split(' '),
-      winner = null;
+      winner = null,
       maxHitCount = 0,
       hitCount = 0,
       active_theme = {};
